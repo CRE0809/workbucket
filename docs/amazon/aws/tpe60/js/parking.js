@@ -34,11 +34,25 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         var str = [];
         for(var i in text2) {
             const type = text2[i]["Type of delivery"].trim().toLowerCase().split(',');
-            if(text2[i].DC == "TPE60" && text2[i]["Type of delivery"] == "RACK") {
-                str.push(text2[i]["Vehicle registration number"]);
-                str = str.filter(function (el) { return el != null; });
-                document.getElementById("dateFrom").textContent = text2[i]["Delivery Date"].replaceAll("-","/");
-                document.getElementById("dateEnd").textContent = text2[i]["Delivery Date"].replaceAll("-","/");
+            if(text2[i].DC == "TPE60") {
+                switch(document.getElementById("reasonSelect").value) {
+                    case "Rack Delivery":
+                        if(type.includes("rack")) {
+                            str.push(text2[i]["Vehicle registration number"]);
+                            str = str.filter(function (el) { return el != null; });
+                            document.getElementById("dateFrom").textContent = text2[i]["Delivery Date"].replaceAll("-","/");
+                            document.getElementById("dateEnd").textContent = text2[i]["Delivery Date"].replaceAll("-","/");
+                        }
+                        break;
+                    case "Receiving Cargo":
+                        if(type.includes("lg") || type.includes("others")) {
+                            str.push(text2[i]["Vehicle registration number"]);
+                            str = str.filter(function (el) { return el != null; });
+                            document.getElementById("dateFrom").textContent = text2[i]["Delivery Date"].replaceAll("-","/");
+                            document.getElementById("dateEnd").textContent = text2[i]["Delivery Date"].replaceAll("-","/");
+                        }
+                        break;
+                }
             }
         }
         str = str.filter(item => item !== "" && item !== null && item !== undefined);
