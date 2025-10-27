@@ -60,30 +60,25 @@ async function copyPages(dateStart,dateEnd,people) {
     // 第一頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [0])
     pdfDoc.addPage(firstDonorPage);
-    // 申請人
     firstDonorPage.drawText(`Becky Chen`, { x: 125, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
-    // 承包廠商名稱
-    firstDonorPage.drawText(`DB Schenker`, { x: 125, y: 655, size: 10, font: customFont, color: rgb(0,0,0)});
-    // 申請日期
-    firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
-    // 施工期間
+    firstDonorPage.drawText(`DB Schenker`, { x: 125, y: 655, size: 10, font: customFont, color: rgb(0,0,0)});    
+    firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 726, size: 10, font: customFont, color: rgb(0,0,0)})    
     firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 125, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
-    // 施工事項內容
-    firstDonorPage.drawText(`Rack Delivery`, { x: 125, y: 530, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`Rack Delivery`, { x: 125, y: 533, size: 10, font: customFont, color: rgb(0,0,0)});
 
     // 第二頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [1])
     pdfDoc.addPage(firstDonorPage);
-    firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 153, y: 710, size: 12, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 153, y: 690, size: 12, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 140, y: 710, size: 12, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 140, y: 690, size: 12, font: customFont, color: rgb(0,0,0)});
     // 承攬廠商
-    // placeholder
+    firstDonorPage.drawText(`DB Schenker`, { x: 125, y: 660, size: 10, font: customFont, color: rgb(0,0,0)});
     // 負責人
-    // placeholder
+    firstDonorPage.drawText(`王俊嵐`, { x: 125, y: 640, size: 10, font: customFont, color: rgb(0,0,0)});
     // 工作場所負責人
-    // placeholder
+    firstDonorPage.drawText(`王俊嵐`, { x: 125, y: 620, size: 10, font: customFont, color: rgb(0,0,0)});
     // 連絡電話
-    // placeholder
+    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 125, y: 600, size: 10, font: customFont, color: rgb(0,0,0)});
 
     var yyy = 385;
     for(var i in people) {
