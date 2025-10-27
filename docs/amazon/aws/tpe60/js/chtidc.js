@@ -69,7 +69,7 @@ async function copyPages(dateStart,dateEnd,people) {
     firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 153, y: 710, size: 12, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 153, y: 690, size: 12, font: customFont, color: rgb(0,0,0)});
 
-    var yyy = 400;
+    var yyy = 380;
     for(var i in people) {
         if(i % 2 == 0) {
             firstDonorPage.drawText(`${people[i].name}`, { x: 110, y: yyy, size: 12, font: customFont, color: rgb(0,0,0)});
@@ -106,7 +106,7 @@ async function copyPages(dateStart,dateEnd,people) {
     pdfDoc.addPage(firstDonorPage);
     firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 150, y: 673, size: 10, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`${dateStart}`, { x: 347, y: 645, size: 9, font: customFont, color: rgb(0,0,0)});
-    for(var i in people) firstDonorPage.drawText(`${people[i].name}`, { x: 75, y: 600 - i*35, size: 12, font: customFont, color: rgb(0,0,0)});
+    for(var i in people) firstDonorPage.drawText(`${people[i].name}`, { x: 75, y: 570 - i*35, size: 12, font: customFont, color: rgb(0,0,0)});
 
     for(var i = 4; i < firstDonorPageCount.length; i++) {
         var [elseDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [i])
