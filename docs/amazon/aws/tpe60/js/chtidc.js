@@ -74,11 +74,11 @@ async function copyPages(dateStart,dateEnd,people) {
     // 承攬廠商
     firstDonorPage.drawText(`DB Schenker`, { x: 125, y: 660, size: 10, font: customFont, color: rgb(0,0,0)});
     // 負責人
-    firstDonorPage.drawText(`王俊嵐`, { x: 125, y: 630, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`王俊嵐`, { x: 125, y: 625, size: 10, font: customFont, color: rgb(0,0,0)});
     // 工作場所負責人
-    firstDonorPage.drawText(`王俊嵐`, { x: 125, y: 610, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`王俊嵐`, { x: 125, y: 600, size: 10, font: customFont, color: rgb(0,0,0)});
     // 連絡電話
-    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 125, y: 580, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 125, y: 570, size: 10, font: customFont, color: rgb(0,0,0)});
 
     var yyy = 385;
     for(var i in people) {
