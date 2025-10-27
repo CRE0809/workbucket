@@ -23,16 +23,27 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         const text2 = csvJSON(text);
         var str = [];
         var dateStart, dateEnd;
-        console.log(document.getElementById("type").value);
         for(var i in text2) {
             const type = text2[i]["Type of delivery"].trim().toLowerCase().split(',');
-            if(text2[i].DC == "TPE60" && type.includes("rack")) {
-                str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
-                str = str.filter(function (el) {
-                    return el != null;
-                });
-                dateStart = text2[i]["Delivery Date"].replaceAll("-","/");
-                dateEnd = text2[i]["Delivery Date"].replaceAll("-","/");
+            if(text2[i].DC == "TPE60") {
+                switch(document.getElementById("type").value) {
+                    case "rack":
+                        if(type.includes("rack")) {
+                            str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
+                            str = str.filter(function (el) {return el != null;});
+                            dateStart = text2[i]["Delivery Date"].replaceAll("-","/");
+                            dateEnd = text2[i]["Delivery Date"].replaceAll("-","/");
+                        }
+                        break;
+                    case "logistic":
+                        if(type.includes("lg") || type.includes("others")) {
+                            str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
+                            str = str.filter(function (el) {return el != null;});
+                            dateStart = text2[i]["Delivery Date"].replaceAll("-","/");
+                            dateEnd = text2[i]["Delivery Date"].replaceAll("-","/");
+                        }
+                        break;
+                }
             }
         }
         copyPages(dateStart, dateEnd, str);
