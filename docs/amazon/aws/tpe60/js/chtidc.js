@@ -60,8 +60,8 @@ async function copyPages(dateStart,dateEnd,people) {
     // 第一頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [0])
     pdfDoc.addPage(firstDonorPage);
-    firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 683, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 152, y: 560, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 800, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 152, y: 700, size: 10, font: customFont, color: rgb(0,0,0)});
 
     // 第二頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [1])
