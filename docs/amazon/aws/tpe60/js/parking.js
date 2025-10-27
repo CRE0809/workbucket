@@ -2,6 +2,10 @@ const startModel = new bootstrap.Modal('#exampleModal');
 
 document.addEventListener("DOMContentLoaded", () => {
     startModel.show();
+    const mySelect = ;
+    document.getElementById('reasonSelect').addEventListener('change', function() {
+        document.getElementById("reason").textContent = document.getElementById("reasonSelect").value;
+    });
 });
 
 document.getElementById('loginInput').addEventListener('input', (event) => { document.getElementById('login').textContent = `　　　${document.getElementById('loginInput').value}　　　`});
