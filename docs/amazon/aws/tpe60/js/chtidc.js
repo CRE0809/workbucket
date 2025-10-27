@@ -30,25 +30,11 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         }
         for(var i in text2) {
             const type = text2[i]["Type of delivery"].replaceAll(" ", "").toLowerCase().split(',');
-            if(text2[i].DC == "TPE60") {
-                switch(document.getElementById("reason").value) {
-                    case "rack":
-                        if(type.includes("rack")) {
-                            str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
-                            str = str.filter(function (el) {return el != null;});
-                            dateStart = text2[i]["Delivery Date"].replaceAll("-","/");
-                            dateEnd = text2[i]["Delivery Date"].replaceAll("-","/");
-                        }
-                        break;
-                    case "lb":
-                        if(type.includes("lb")) {
-                            str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
-                            str = str.filter(function (el) {return el != null;});
-                            dateStart = text2[i]["Delivery Date"].replaceAll("-","/");
-                            dateEnd = text2[i]["Delivery Date"].replaceAll("-","/");
-                        }
-                        break;
-                }
+            if(text2[i].DC == "TPE60" && type.some(item => checkedType.includes(item))) {
+                str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
+                str = str.filter(function (el) {return el != null;});
+                dateStart = text2[i]["Delivery Date"].replaceAll("-","/");
+                dateEnd = text2[i]["Delivery Date"].replaceAll("-","/");
             }
         }
         copyPages(dateStart, dateEnd, str, document.getElementById("reason").value, document.getElementById("vendor").value);
