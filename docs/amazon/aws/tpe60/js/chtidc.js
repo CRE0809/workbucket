@@ -35,8 +35,8 @@ document.getElementById("formFile").addEventListener("change", (event) => {
                             dateEnd = text2[i]["Delivery Date"].replaceAll("-","/");
                         }
                         break;
-                    case "logistic":
-                        if(type.includes("lg") || type.includes("others")) {
+                    case "lb":
+                        if(type.includes("lb")) {
                             str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
                             str = str.filter(function (el) {return el != null;});
                             dateStart = text2[i]["Delivery Date"].replaceAll("-","/");
@@ -46,13 +46,13 @@ document.getElementById("formFile").addEventListener("change", (event) => {
                 }
             }
         }
-        copyPages(dateStart, dateEnd, str, document.getElementById("reason").value);
+        copyPages(dateStart, dateEnd, str, document.getElementById("reason").value, document.getElementById("vendor").value);
     };
     reader.onerror = () => { console.log("Error reading the file. Please try again.", "error"); };
     reader.readAsText(file);
 });
 
-async function copyPages(dateStart,dateEnd,people,type) {
+async function copyPages(dateStart,dateEnd,people,type,vendor) {
     const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib;
     const { ontkit } = fontkit;
 
@@ -73,21 +73,51 @@ async function copyPages(dateStart,dateEnd,people,type) {
     // 第一頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [0])
     pdfDoc.addPage(firstDonorPage);
-    firstDonorPage.drawText(`Becky Chen`, { x: 125, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`DB Schenker`, { x: 125, y: 655, size: 10, font: customFont, color: rgb(0,0,0)});    
+    
     firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 726, size: 10, font: customFont, color: rgb(0,0,0)})    
     firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 125, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`Rack Delivery`, { x: 125, y: 533, size: 10, font: customFont, color: rgb(0,0,0)});
+    switch(vendor) {
+        case "dbs":
+            firstDonorPage.drawText(`Becky Chen`, { x: 125, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`DB Schenker`, { x: 125, y: 655, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+        case "lantro":
+            firstDonorPage.drawText(`Alec Chan`, { x: 125, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`Lantro`, { x: 125, y: 655, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+        case "xin":
+            firstDonorPage.drawText(`Alec Chan`, { x: 125, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`Xin Networks`, { x: 125, y: 655, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+    }
 
     // 第二頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [1])
     pdfDoc.addPage(firstDonorPage);
     firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 130, y: 712, size: 12, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 130, y: 692, size: 12, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`DB Schenker`, { x: 130, y: 660, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 627, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 598, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 569, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateEnd} 20 時 止`, { x: 130, y: 692, size: 12, font: customFont, color: rgb(0,0,0)});
+
+    switch(vendor) {
+        case "dbs":
+            firstDonorPage.drawText(`DB Schenker`, { x: 130, y: 660, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 627, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 598, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 569, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+        case "lantro":
+            firstDonorPage.drawText(`Lantro`, { x: 130, y: 660, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`徐子珊`, { x: 130, y: 627, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`徐子珊`, { x: 130, y: 598, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`886-2-2658-1047 #13`, { x: 130, y: 569, size: 10, font: customFont, color: rgb(0,0,0)});            
+            break;
+        case "xin":
+            firstDonorPage.drawText(`Xin Networks`, { x: 130, y: 660, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`Law Jia Ting`, { x: 130, y: 627, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`Law Jia Ting`, { x: 130, y: 598, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`+65 91751990`, { x: 130, y: 569, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+    }
 
     var yyy = 389;
     for(var i in people) {
@@ -106,11 +136,28 @@ async function copyPages(dateStart,dateEnd,people,type) {
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [2])
     pdfDoc.addPage(firstDonorPage);
     firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 130, y: 680, size: 12, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 130, y: 660, size: 12, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`DB Schenker`, { x: 130, y: 610, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 573, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 546, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 516, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateEnd} 20 時 止`, { x: 130, y: 660, size: 12, font: customFont, color: rgb(0,0,0)});
+
+    switch(vendor) {
+        case "dbs":
+            firstDonorPage.drawText(`DB Schenker`, { x: 130, y: 610, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 573, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 546, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 516, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+        case "lantro":
+            firstDonorPage.drawText(`Lantro`, { x: 130, y: 610, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`徐子珊`, { x: 130, y: 573, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`徐子珊`, { x: 130, y: 546, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`886-2-2658-1047 #13`, { x: 130, y: 516, size: 10, font: customFont, color: rgb(0,0,0)});        
+            break;
+        case "xin":
+            firstDonorPage.drawText(`Xin Networks`, { x: 130, y: 610, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`Law Jia Ting`, { x: 130, y: 573, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`Law Jia Ting`, { x: 130, y: 546, size: 10, font: customFont, color: rgb(0,0,0)});
+            firstDonorPage.drawText(`+65 91751990`, { x: 130, y: 516, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+    }
 
     var yyy = 395;
     for(var i in people) {
