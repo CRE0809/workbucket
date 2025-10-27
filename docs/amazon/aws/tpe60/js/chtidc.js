@@ -76,7 +76,16 @@ async function copyPages(dateStart,dateEnd,people,type,vendor) {
     
     firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 726, size: 10, font: customFont, color: rgb(0,0,0)})    
     firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 125, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`Rack Delivery`, { x: 125, y: 533, size: 10, font: customFont, color: rgb(0,0,0)});
+
+    switch(type) {
+        case "rack":
+            firstDonorPage.drawText(`Rack Delivery`, { x: 125, y: 533, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+        case "lb";
+            firstDonorPage.drawText(`Cabling Work`, { x: 125, y: 533, size: 10, font: customFont, color: rgb(0,0,0)});
+            break;
+    }
+
     switch(vendor) {
         case "dbs":
             firstDonorPage.drawText(`Becky Chen`, { x: 125, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
