@@ -76,7 +76,7 @@ async function copyPages(dateStart,dateEnd,people) {
     firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 598, size: 10, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 569, size: 10, font: customFont, color: rgb(0,0,0)});
 
-    var yyy = 385;
+    var yyy = 389;
     for(var i in people) {
         if(i % 2 == 0) {
             firstDonorPage.drawText(`${people[i].name}`, { x: 110, y: yyy, size: 12, font: customFont, color: rgb(0,0,0)});
@@ -85,19 +85,19 @@ async function copyPages(dateStart,dateEnd,people) {
         else {
             firstDonorPage.drawText(`${people[i].name}`, { x: 385, y: yyy, size: 12, font: customFont, color: rgb(0,0,0)});
             firstDonorPage.drawText(`${people[i].phone}`, { x: 475, y: yyy, size: 12, font: customFont, color: rgb(0,0,0)});
-            yyy -= 27;
+            yyy -= 28;
         }
     }
 
     // 第三頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [2])
     pdfDoc.addPage(firstDonorPage);
-    firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 150, y: 680, size: 12, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 150, y: 660, size: 12, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 130, y: 680, size: 12, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 130, y: 660, size: 12, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`DB Schenker`, { x: 130, y: 610, size: 10, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 573, size: 10, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 546, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 518, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 516, size: 10, font: customFont, color: rgb(0,0,0)});
 
     var yyy = 395;
     for(var i in people) {
@@ -108,7 +108,7 @@ async function copyPages(dateStart,dateEnd,people) {
         else {
             firstDonorPage.drawText(`${people[i].name}`, { x: 385, y: yyy, size: 12, font: customFont, color: rgb(0,0,0)});
             firstDonorPage.drawText(`${people[i].phone}`, { x: 475, y: yyy, size: 12, font: customFont, color: rgb(0,0,0)});
-            yyy -= 27;
+            yyy -= 29;
         }
     }
 
