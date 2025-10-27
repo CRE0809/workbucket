@@ -55,17 +55,12 @@ document.getElementById("formFile").addEventListener("change", (event) => {
 async function copyPages(dateStart,dateEnd,people,type,vendor) {
     const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib;
     const { ontkit } = fontkit;
-
     const fonturl = 'https://workbucket.cretw.com/amazon/aws/tpe60/files/NotoSansTC-Regular.ttf';
     const fontBytes = await fetch(fonturl).then(res => res.arrayBuffer())
-
     const url1 = 'https://workbucket.cretw.com/amazon/aws/tpe60/files/raw.pdf';
-
     const firstDonorPdfBytes = await fetch(url1).then(res => res.arrayBuffer())
-
     const firstDonorPdfDoc = await PDFDocument.load(firstDonorPdfBytes);
     const firstDonorPageCount = await firstDonorPdfDoc.getPages();
-
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontkit);
     const customFont = await pdfDoc.embedFont(fontBytes);
@@ -81,7 +76,7 @@ async function copyPages(dateStart,dateEnd,people,type,vendor) {
         case "rack":
             firstDonorPage.drawText(`Rack Delivery`, { x: 125, y: 533, size: 10, font: customFont, color: rgb(0,0,0)});
             break;
-        case "lb";
+        case "lb":
             firstDonorPage.drawText(`Cabling Work`, { x: 125, y: 533, size: 10, font: customFont, color: rgb(0,0,0)});
             break;
     }
