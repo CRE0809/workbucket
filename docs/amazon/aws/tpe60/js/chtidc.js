@@ -125,21 +125,20 @@ async function copyPages(dateStart,dateEnd,people,type) {
         }
     }
 
-    // 第四頁
-    var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [3])
-    pdfDoc.addPage(firstDonorPage);
-    firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 148, y: 673, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`${dateStart}`, { x: 347, y: 645, size: 9, font: customFont, color: rgb(0,0,0)});
-    for(var i in people) firstDonorPage.drawText(`${people[i].name}`, { x: 70, y: 570 - i*35, size: 12, font: customFont, color: rgb(0,0,0)});
-
-
     if(type == "rack") {
+        // 第四頁
+        var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [3])
+        pdfDoc.addPage(firstDonorPage);
+        firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 148, y: 673, size: 10, font: customFont, color: rgb(0,0,0)});
+        firstDonorPage.drawText(`${dateStart}`, { x: 347, y: 645, size: 9, font: customFont, color: rgb(0,0,0)});
+        for(var i in people) firstDonorPage.drawText(`${people[i].name}`, { x: 70, y: 570 - i*35, size: 12, font: customFont, color: rgb(0,0,0)});
+
         for(var i = 4; i < firstDonorPageCount.length; i++) {
             var [elseDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [i])
             pdfDoc.addPage(elseDonorPage);
         }
     }
-    
+
     const pdfBytes = await pdfDoc.save();
     download(pdfBytes, "cht-idc.pdf", "application/pdf");
     document.getElementById("finishBody").innerHTML = "The file will download soon!<br>Experiencing issues? Please send a message to cretw@.";
