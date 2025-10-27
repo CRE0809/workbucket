@@ -60,14 +60,30 @@ async function copyPages(dateStart,dateEnd,people) {
     // 第一頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [0])
     pdfDoc.addPage(firstDonorPage);
+    // 申請人
+    firstDonorPage.drawText(`Becky Chen`, { x: 140, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
+    // 承包廠商名稱
+    firstDonorPage.drawText(`DB Schenker`, { x: 140, y: 660, size: 10, font: customFont, color: rgb(0,0,0)});
+    // 申請日期
     firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
+    // 施工期間
     firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 152, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
+    // 施工事項內容
+    firstDonorPage.drawText(`Rack Delivery`, { x: 152, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
 
     // 第二頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [1])
     pdfDoc.addPage(firstDonorPage);
     firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 153, y: 710, size: 12, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 153, y: 690, size: 12, font: customFont, color: rgb(0,0,0)});
+    // 承攬廠商
+    // placeholder
+    // 負責人
+    // placeholder
+    // 工作場所負責人
+    // placeholder
+    // 連絡電話
+    // placeholder
 
     var yyy = 385;
     for(var i in people) {
@@ -87,6 +103,14 @@ async function copyPages(dateStart,dateEnd,people) {
     pdfDoc.addPage(firstDonorPage);
     firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 150, y: 680, size: 12, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 150, y: 660, size: 12, font: customFont, color: rgb(0,0,0)});
+    // 承攬廠商
+    // placeholder
+    // 負責人
+    // placeholder
+    // 工作場所負責人
+    // placeholder
+    // 連絡電話
+    // placeholder
 
     var yyy = 395;
     for(var i in people) {
@@ -106,7 +130,7 @@ async function copyPages(dateStart,dateEnd,people) {
     pdfDoc.addPage(firstDonorPage);
     firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 148, y: 673, size: 10, font: customFont, color: rgb(0,0,0)});
     firstDonorPage.drawText(`${dateStart}`, { x: 347, y: 645, size: 9, font: customFont, color: rgb(0,0,0)});
-    for(var i in people) firstDonorPage.drawText(`${people[i].name}`, { x: 75, y: 570 - i*35, size: 12, font: customFont, color: rgb(0,0,0)});
+    for(var i in people) firstDonorPage.drawText(`${people[i].name}`, { x: 70, y: 570 - i*35, size: 12, font: customFont, color: rgb(0,0,0)});
 
     for(var i = 4; i < firstDonorPageCount.length; i++) {
         var [elseDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [i])
