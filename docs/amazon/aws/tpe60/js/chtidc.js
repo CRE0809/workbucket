@@ -24,10 +24,6 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         var str = [];
         var dateStart, dateEnd;
         const checkedType = getChecked('type');
-        console.log(checkedType);
-        for(var i in checkedType) {
-            console.warn(checkedType[i]);
-        }
         for(var i in text2) {
             const type = text2[i]["Type of delivery"].replaceAll(" ", "").toLowerCase().split(',');
             if(text2[i].DC == "TPE60" && type.some(item => checkedType.includes(item))) {
