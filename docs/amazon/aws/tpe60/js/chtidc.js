@@ -24,6 +24,8 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         var str = [];
         var dateStart, dateEnd;
         for(var i in text2) {
+            const type = text2[i]["Type of delivery"].trim().toLowerCase().split(',');
+            console.log(type);
             if(text2[i].DC == "TPE60" && text2[i]["Type of delivery"] == "RACK") {
                 str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
                 str = str.filter(function (el) {
