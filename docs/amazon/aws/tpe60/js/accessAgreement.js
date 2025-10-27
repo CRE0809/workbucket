@@ -26,11 +26,26 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         const text2 = csvJSON(text);
         var str = [];
         for(var i in text2) {
-            if(text2[i].DC == "TPE60" && text2[i]["Type of delivery"] == "RACK") {
-                str.push({"name": text2[i]["Name in local language(if applicable)"] , "id" : text2[i]["Government ID"]});
-                document.getElementById("dateFrom").textContent = formatSimpleFullYearDate(text2[i]["Delivery Date"]);
-                document.getElementById("dateEnd").textContent = formatSimpleFullYearDate(text2[i]["Delivery Date"]);
+            const type = text2[i]["Type of delivery"].trim().toLowerCase().split(',');
+            if(text2[i].DC == "TPE60") {
+                switch(document.getElementById("reasonSelect").value) {
+                    case "Rack Delivery":
+                        if(type.includes("rack")) {
+                            str.push({"name": text2[i]["Name in local language(if applicable)"] , "id" : text2[i]["Government ID"]});
+                            document.getElementById("dateFrom").textContent = formatSimpleFullYearDate(text2[i]["Delivery Date"]);
+                            document.getElementById("dateEnd").textContent = formatSimpleFullYearDate(text2[i]["Delivery Date"]);
+                        }
+                        break;
+                    case "Receiving Cargo":
+                        if(type.includes("lg") || type.includes("others")) {
+                            str.push({"name": text2[i]["Name in local language(if applicable)"] , "id" : text2[i]["Government ID"]});
+                            document.getElementById("dateFrom").textContent = formatSimpleFullYearDate(text2[i]["Delivery Date"]);
+                            document.getElementById("dateEnd").textContent = formatSimpleFullYearDate(text2[i]["Delivery Date"]);
+                        }
+                        break;
+                }
             }
+
         }
         for(var i in str) {
             document.getElementById(`field-${parseInt(i) + 1}-1`).textContent = str[i].name;
