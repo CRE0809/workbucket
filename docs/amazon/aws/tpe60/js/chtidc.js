@@ -24,7 +24,7 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         var str = [];
         var dateStart, dateEnd;
         for(var i in text2) {
-            const type = text2[i]["Type of delivery"].trim().toLowerCase().split(',');
+            const type = text2[i]["Type of delivery"].replaceAll(" ", "").toLowerCase().split(',');
             if(text2[i].DC == "TPE60") {
                 switch(document.getElementById("type").value) {
                     case "rack":

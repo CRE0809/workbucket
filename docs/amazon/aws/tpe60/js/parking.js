@@ -33,7 +33,7 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         const text2 = csvJSON(text);
         var str = [];
         for(var i in text2) {
-            const type = text2[i]["Type of delivery"].trim().toLowerCase().split(',');
+            const type = text2[i]["Type of delivery"].replaceAll(" ", "").toLowerCase().split(',');
             if(text2[i].DC == "TPE60") {
                 switch(document.getElementById("reasonSelect").value) {
                     case "Rack Delivery":
