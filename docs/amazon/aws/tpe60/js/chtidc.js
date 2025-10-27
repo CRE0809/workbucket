@@ -93,11 +93,11 @@ async function copyPages(dateStart,dateEnd,people) {
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [2])
     pdfDoc.addPage(firstDonorPage);
     firstDonorPage.drawText(`${dateStart} 08 時 起`, { x: 150, y: 680, size: 12, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 150, y: 660, size: 12, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`DB Schenker`, { x: 130, y: 628, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 566, size: 10, font: customFont, color: rgb(0,0,0)});
-    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 540, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateEnd} 19 時 止`, { x: 150, y: 630, size: 12, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`DB Schenker`, { x: 130, y: 600, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 565, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`王俊嵐`, { x: 130, y: 536, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`03-3852500 分機 401`, { x: 130, y: 510, size: 10, font: customFont, color: rgb(0,0,0)});
 
     var yyy = 395;
     for(var i in people) {
