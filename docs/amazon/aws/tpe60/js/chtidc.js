@@ -23,8 +23,11 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         const text2 = csvJSON(text);
         var str = [];
         var dateStart, dateEnd;
-        const checkedType = getChecked('name');
+        const checkedType = getChecked('type');
         console.log(checkedType);
+        for(var i in checkedType) {
+            console.warn(checkedType[i]);
+        }
         for(var i in text2) {
             const type = text2[i]["Type of delivery"].replaceAll(" ", "").toLowerCase().split(',');
             if(text2[i].DC == "TPE60") {
