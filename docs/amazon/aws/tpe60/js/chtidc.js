@@ -23,6 +23,8 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         const text2 = csvJSON(text);
         var str = [];
         var dateStart, dateEnd;
+        const checkedType = getChecked('name');
+        console.log(checkedType);
         for(var i in text2) {
             const type = text2[i]["Type of delivery"].replaceAll(" ", "").toLowerCase().split(',');
             if(text2[i].DC == "TPE60") {
@@ -52,7 +54,7 @@ document.getElementById("formFile").addEventListener("change", (event) => {
     reader.readAsText(file);
 });
 
-async function copyPages(dateStart,dateEnd,people,type,vendor) {
+async function copyPages(dateStart,dateEnd,people,reason,vendor) {
     const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib;
     const { ontkit } = fontkit;
     const fonturl = 'https://workbucket.cretw.com/amazon/aws/tpe60/files/NotoSansTC-Regular.ttf';
@@ -72,7 +74,7 @@ async function copyPages(dateStart,dateEnd,people,type,vendor) {
     firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 726, size: 10, font: customFont, color: rgb(0,0,0)})    
     firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 125, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
 
-    switch(type) {
+    switch(reason) {
         case "rack":
             firstDonorPage.drawText(`Rack Delivery`, { x: 125, y: 533, size: 10, font: customFont, color: rgb(0,0,0)});
             break;
@@ -176,7 +178,7 @@ async function copyPages(dateStart,dateEnd,people,type,vendor) {
         }
     }
 
-    if(type == "rack") {
+    if(reason == "rack") {
         // 第四頁
         var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [3])
         pdfDoc.addPage(firstDonorPage);
@@ -209,4 +211,11 @@ function csvJSON(csv){
         result.push(obj);
     }
     return result;
+}
+
+function getChecked(name) {
+    const selector = `input[name="${name}"]:checked`;
+    const checkedElements = document.querySelectorAll(selector);
+    const checkedValues = Array.from(checkedElements).map(element => element.value);
+    return checkedValues;
 }
