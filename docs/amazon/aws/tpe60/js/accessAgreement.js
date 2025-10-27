@@ -2,6 +2,9 @@ const startModel = new bootstrap.Modal('#exampleModal');
 
 document.addEventListener("DOMContentLoaded", () => {
     startModel.show();
+    document.getElementById('reasonSelect').addEventListener('change', function() {
+        for(var i = 1 ; i < 20 ; i++) document.getElementById(`field-${parseInt(i) + 1}-1`).classList.remove('text-white').classList.add('text-white');
+    });
 });
 
 document.getElementById("printBtn").addEventListener("click", () => {
@@ -26,9 +29,7 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         const text2 = csvJSON(text);
         var str = [];
         for(var i in text2) {
-            console.log(text2[i]["Type of delivery"]);
             const type = text2[i]["Type of delivery"].replaceAll(" ", "").toLowerCase().split(',');
-            console.log(type);
             if(text2[i].DC == "TPE60") {
                 switch(document.getElementById("reasonSelect").value) {
                     case "Rack Delivery":
