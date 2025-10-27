@@ -46,13 +46,13 @@ document.getElementById("formFile").addEventListener("change", (event) => {
                 }
             }
         }
-        copyPages(dateStart, dateEnd, str);
+        copyPages(dateStart, dateEnd, str, document.getElementById("type").value);
     };
     reader.onerror = () => { console.log("Error reading the file. Please try again.", "error"); };
     reader.readAsText(file);
 });
 
-async function copyPages(dateStart,dateEnd,people) {
+async function copyPages(dateStart,dateEnd,people,type) {
     const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib;
     const { ontkit } = fontkit;
 
@@ -132,10 +132,14 @@ async function copyPages(dateStart,dateEnd,people) {
     firstDonorPage.drawText(`${dateStart}`, { x: 347, y: 645, size: 9, font: customFont, color: rgb(0,0,0)});
     for(var i in people) firstDonorPage.drawText(`${people[i].name}`, { x: 70, y: 570 - i*35, size: 12, font: customFont, color: rgb(0,0,0)});
 
-    for(var i = 4; i < firstDonorPageCount.length; i++) {
-        var [elseDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [i])
-        pdfDoc.addPage(elseDonorPage);
+
+    if(type == "rack") {
+        for(var i = 4; i < firstDonorPageCount.length; i++) {
+            var [elseDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [i])
+            pdfDoc.addPage(elseDonorPage);
+        }
     }
+    
     const pdfBytes = await pdfDoc.save();
     download(pdfBytes, "cht-idc.pdf", "application/pdf");
     document.getElementById("finishBody").innerHTML = "The file will download soon!<br>Experiencing issues? Please send a message to cretw@.";
