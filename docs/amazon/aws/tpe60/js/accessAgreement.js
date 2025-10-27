@@ -3,9 +3,13 @@ const startModel = new bootstrap.Modal('#exampleModal');
 document.addEventListener("DOMContentLoaded", () => {
     startModel.show();
     document.getElementById('reasonSelect').addEventListener('change', function() {
-        for(var i = 1 ; i < 20 ; i++) {
+        for(var i = 1 ; i < 21 ; i++) {
             document.getElementById(`field-${parseInt(i) + 1}-1`).classList.remove('text-white');
             document.getElementById(`field-${parseInt(i) + 1}-1`).classList.add('text-white');
+            for (var j = 0 ; j < 5 ; j++) {
+                document.getElementById(`field-${parseInt(i) + 1}-${2+j}`).classList.remove('text-white');
+                document.getElementById(`field-${parseInt(i) + 1}-${2+j}`).classList.add('text-white');
+            }
         }
     });
 });
