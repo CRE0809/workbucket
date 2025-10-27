@@ -61,15 +61,15 @@ async function copyPages(dateStart,dateEnd,people) {
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [0])
     pdfDoc.addPage(firstDonorPage);
     // 申請人
-    firstDonorPage.drawText(`Becky Chen`, { x: 130, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`Becky Chen`, { x: 125, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
     // 承包廠商名稱
-    firstDonorPage.drawText(`DB Schenker`, { x: 130, y: 655, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`DB Schenker`, { x: 125, y: 655, size: 10, font: customFont, color: rgb(0,0,0)});
     // 申請日期
     firstDonorPage.drawText(`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`, { x: 375, y: 726, size: 10, font: customFont, color: rgb(0,0,0)});
     // 施工期間
-    firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 152, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 125, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
     // 施工事項內容
-    firstDonorPage.drawText(`Rack Delivery`, { x: 130, y: 520, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`Rack Delivery`, { x: 125, y: 530, size: 10, font: customFont, color: rgb(0,0,0)});
 
     // 第二頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [1])
