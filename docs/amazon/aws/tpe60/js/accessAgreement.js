@@ -3,6 +3,7 @@ const startModel = new bootstrap.Modal('#exampleModal');
 document.addEventListener("DOMContentLoaded", () => {
     startModel.show();
     document.getElementById('reasonSelect').addEventListener('change', function() {
+        clearFileInput(document.getElementById("formFile"));
         for(var i = 0 ; i < 21 ; i++) {
             document.getElementById(`field-${parseInt(i) + 1}-1`).classList.remove('text-white');
             document.getElementById(`field-${parseInt(i) + 1}-1`).classList.add('text-white');
@@ -92,4 +93,12 @@ function formatSimpleFullYearDate(dateString) {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = String(date.getFullYear());
     return `${day}-${month}-${year}`;
+}
+
+function clearFileInput(ctrl) { 
+    try { 
+        ctrl.value = null;
+    }
+    catch(ex) {} 
+    if (ctrl.value) ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl); 
 }
