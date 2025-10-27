@@ -69,7 +69,7 @@ async function copyPages(dateStart,dateEnd,people) {
     // 施工期間
     firstDonorPage.drawText(`${dateStart} ~ ${dateEnd}`, { x: 152, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
     // 施工事項內容
-    firstDonorPage.drawText(`Rack Delivery`, { x: 152, y: 595, size: 10, font: customFont, color: rgb(0,0,0)});
+    firstDonorPage.drawText(`Rack Delivery`, { x: 152, y: 540, size: 10, font: customFont, color: rgb(0,0,0)});
 
     // 第二頁
     var [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [1])
