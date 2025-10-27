@@ -26,7 +26,7 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         for(var i in text2) {
             const type = text2[i]["Type of delivery"].replaceAll(" ", "").toLowerCase().split(',');
             if(text2[i].DC == "TPE60") {
-                switch(document.getElementById("type").value) {
+                switch(document.getElementById("reason").value) {
                     case "rack":
                         if(type.includes("rack")) {
                             str.push({"name": text2[i]["Name in local language(if applicable)"] , "phone" : text2[i]["Contact number"]});
@@ -46,7 +46,7 @@ document.getElementById("formFile").addEventListener("change", (event) => {
                 }
             }
         }
-        copyPages(dateStart, dateEnd, str, document.getElementById("type").value);
+        copyPages(dateStart, dateEnd, str, document.getElementById("reason").value);
     };
     reader.onerror = () => { console.log("Error reading the file. Please try again.", "error"); };
     reader.readAsText(file);
