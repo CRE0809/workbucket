@@ -2,7 +2,6 @@ const startModel = new bootstrap.Modal('#exampleModal');
 
 document.addEventListener("DOMContentLoaded", () => {
     startModel.show();
-    const mySelect = ;
     document.getElementById('reasonSelect').addEventListener('change', function() {
         document.getElementById("reason").textContent = document.getElementById("reasonSelect").value;
     });
@@ -34,6 +33,7 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         const text2 = csvJSON(text);
         var str = [];
         for(var i in text2) {
+            const type = text2[i]["Type of delivery"].trim().toLowerCase().split(',');
             if(text2[i].DC == "TPE60" && text2[i]["Type of delivery"] == "RACK") {
                 str.push(text2[i]["Vehicle registration number"]);
                 str = str.filter(function (el) { return el != null; });
