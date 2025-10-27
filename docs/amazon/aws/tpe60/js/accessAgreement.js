@@ -26,6 +26,7 @@ document.getElementById("formFile").addEventListener("change", (event) => {
         const text2 = csvJSON(text);
         var str = [];
         for(var i in text2) {
+            console.log(text2[i]["Type of delivery"]);
             const type = text2[i]["Type of delivery"].trim().toLowerCase().split(',');
             console.log(type);
             if(text2[i].DC == "TPE60") {
